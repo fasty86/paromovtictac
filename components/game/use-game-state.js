@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { SYMBOL_O, SYMBOL_X } from './constants';
+import { useState } from "react";
+import { SYMBOL_O, SYMBOL_X } from "./constants";
 
 const computeWinner = (cells) => {
   const lines = [
@@ -27,7 +27,7 @@ const computeWinner = (cells) => {
 
 export function useGameState() {
   const [cells, setCells] = useState(() =>
-    Array.from({ length: 9 }, () => null)
+    Array.from({ length: 9 }, () => null),
   );
   const [currentStep, setCurrentStep] = useState(SYMBOL_O);
   const [winnerSequence, setWinnerSequence] = useState();
