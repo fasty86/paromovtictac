@@ -1,22 +1,14 @@
-import { GameSymbol } from "./game-symbol";
-import styles from "./game.module.css";
+import clsx from "clsx";
 
-export function GameInfo({ isDraw, winnerSymbol, currentStep }) {
-  if (isDraw) {
-    return <div className="mb-3">Ничья</div>;
-  }
-
-  if (winnerSymbol) {
-    return (
-      <div className="mb-3">
-        Победитель: <GameSymbol symbol={winnerSymbol} />
-      </div>
-    );
-  }
-
+export function GameInfo({ className }) {
   return (
-    <div className="mb-3">
-      Ход: <GameSymbol symbol={currentStep} />
+    <div
+      className={clsx(
+        className,
+        "bg-white w-[616px] h-20 rounded-2xl px-2 py-4",
+      )}
+    >
+      GameInfo
     </div>
   );
 }
