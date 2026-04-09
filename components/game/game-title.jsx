@@ -3,7 +3,7 @@ import { Arrow, ClockIcon, Star, UserIcon } from "./icons";
 
 export function GameTitle() {
   return (
-    <div className="max-w-[304px] max-h-[72px] flex flex-col items-start gap-2 ml-2">
+    <div className="max-w-[304px]  flex flex-col items-start gap-2 ml-2">
       <Link href="#" className="flex gap-2 text-teal-600 text-xs leading-tight">
         <Arrow />
         <div>На главную</div>

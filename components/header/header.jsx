@@ -11,7 +11,7 @@ export function Header() {
         Играть
       </button>
       <button className="ml-auto flex items-center gap-2 text-teal-600 hover:text-teal-500 transition-colors">
-        <Profile />
+        <Profile playerName={"Толмачев"} rating={150} />
         <ArrowDownIcon />
       </button>
     </header>
