@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { SquareIcon, ZeroIcon } from "./icons";
-import { Button } from "../button";
+import { Button } from "../uikit/button";
 import { useState } from "react";
 import { GameCell } from "../cell";
 export function GameField({ className }) {
@@ -23,16 +23,8 @@ export function GameField({ className }) {
           </div>
         </div>
         <div className="flex gap-2 items-end">
-          <Button
-            className="bg-teal-600 text-white h-8 w-24 text-sm leading-tight hover:bg-teal-500"
-            text={"Ничья"}
-          />
-          <Button
-            className={
-              "border border-teal-600 text-teal-600 h-8 w-28 text-sm leading-tight hover:bg-slate-50"
-            }
-            text={"Сдаться"}
-          />
+          <Button text={"Ничья"} />
+          <Button type="outlined" text={"Сдаться"} />
         </div>
       </div>
       <div className="flex flex-wrap mt-3">
