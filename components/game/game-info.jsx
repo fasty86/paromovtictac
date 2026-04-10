@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Profile } from "../profile";
 import { Divider } from "../divider";
 import { Timer } from "../timer";
-import { O, X } from "./icons";
+import { ZeroIcon, CrossIcon } from "./icons";
 import { Badge } from "../badge";
 export function GameInfo({ className }) {
   return (
@@ -14,9 +14,9 @@ export function GameInfo({ className }) {
     >
       <div className="flex items-baseline  w-[284px]">
         <div className="relative">
-          <div className="text-red-600 w-6 h-6 bg-white absolute -top-2  -left-2 rounded-full shadow-md flex items-center justify-center">
-            <X />
-          </div>
+          <Badge className="text-red-600">
+            <CrossIcon />
+          </Badge>
           <Profile playerName="Толмачев" rating={150} />
         </div>
         <Divider />
@@ -27,7 +27,7 @@ export function GameInfo({ className }) {
         <Divider />
         <div className="relative">
           <Badge className="text-teal-600">
-            <O />
+            <ZeroIcon />
           </Badge>
           <Profile playerName="Tomakazu harimotosssssssssssss" rating={4} />
         </div>
