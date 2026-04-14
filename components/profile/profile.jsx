@@ -1,6 +1,6 @@
 import Image from "next/image";
-import avatar from "./avatar.png";
-export function Profile({ playerName, rating }) {
+import avatarImg from "./avatar.png";
+export function Profile({ playerName, rating, avatar = avatarImg }) {
   return (
     <div className="flex gap-2 items-end w-44">
       <Image src={avatar} alt="avatar" />

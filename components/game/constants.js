@@ -1,0 +1,6 @@
+export const GAME_SYMBOLS = {
+  ZERO: "ZERO",
+  CROSS: "CROSS",
+  SQUARE: "SQUARE",
+  TRIANGLE: "TRIANGLE",
+};
