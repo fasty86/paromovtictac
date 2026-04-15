@@ -10,6 +10,7 @@ import avatarImg from "../profile/avatar.png";
 import player2Avatar from "./player_2.png";
 import player3Avatar from "./player_3.png";
 import player4Avatar from "./player_4.png";
+import { useEffect, useState } from "react";
 const testPlayerData = [
   {
     infoData: { name: "Tolmachev", rating: 150, avatarSrc: avatarImg },
@@ -36,7 +37,7 @@ const testPlayerData = [
     symbol: GAME_SYMBOLS.TRIANGLE,
   },
 ];
-export function GameInfo({ className, playersCount }) {
+export function GameInfo({ className, playersCount, currentMove }) {
   return (
     <div
       className={clsx(
@@ -52,6 +53,7 @@ export function GameInfo({ className, playersCount }) {
             data={player.infoData}
             timer={player.timerData}
             symbol={player.symbol}
+            isActivePlayer={player.symbol === currentMove}
           />
         );
       })}
@@ -63,8 +65,24 @@ function PlayerInfo({
   data: { rating = 150, name = "Толмачев", avatarSrc },
   symbol = GAME_SYMBOLS.CROSS,
   className,
-  timer,
+  timerInitialValue = 60,
+  isActivePlayer,
 }) {
+  const [timer, setTimer] = useState(timerInitialValue);
+  useEffect(() => {
+    let timerId = null;
+
+    if (isActivePlayer) {
+      timerId = setInterval(() => {
+        setTimer((currentTimer) => {
+          if (currentTimer === 0) clearInterval(timerId);
+          return currentTimer > 0 ? currentTimer - 1 : currentTimer;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timerId);
+  }, [isActivePlayer]);
+
   return (
     <div className={clsx("flex items-baseline  w-[264px]", className)}>
       <div className="relative">
@@ -74,7 +92,7 @@ function PlayerInfo({
         <Profile playerName={name} rating={rating} avatar={avatarSrc} />
       </div>
       <Divider />
-      <Timer data={timer} />
+      <Timer data={timer} isActive={isActivePlayer} />
     </div>
   );
 }

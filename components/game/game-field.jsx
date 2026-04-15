@@ -7,10 +7,13 @@ import { GameCell } from "../cell";
 import { GameSymbol } from "./game-symbol";
 import { useGameState } from "./use-game-state";
 
-export function GameField({ className, playersCount }) {
-  const { cells, currentMove, handleCellClick, nextMove } =
-    useGameState(playersCount);
-
+export function GameField({
+  className,
+  currentMove,
+  nextMove,
+  cells,
+  handleCellClick,
+}) {
   return (
     <GameFieldLayout className={className}>
       <GameFieldInfo
