@@ -1,14 +1,15 @@
 import clsx from "clsx";
-import { SquareIcon, ZeroIcon } from "./icons";
+
 import { Button } from "../uikit/button";
-import { useState } from "react";
+
 import { GameCell } from "../cell";
-import { GAME_SYMBOLS } from "./constants";
+
 import { GameSymbol } from "./game-symbol";
 import { useGameState } from "./use-game-state";
 
-export function GameField({ className }) {
-  const { cells, currentMove, handleCellClick, nextMove } = useGameState();
+export function GameField({ className, playersCount }) {
+  const { cells, currentMove, handleCellClick, nextMove } =
+    useGameState(playersCount);
 
   return (
     <GameFieldLayout className={className}>
