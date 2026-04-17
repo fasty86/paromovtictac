@@ -3,8 +3,8 @@ import { GameInfo, GameTitle, useGameState } from "../components/game";
 import { GameField } from "../components/game/game-field";
 import { useState } from "react";
 export default function HomePage() {
-  const [playersCount] = useState(4);
-  const { cells, currentMove, handleCellClick, nextMove } =
+  const [playersCount] = useState(2);
+  const { cells, currentMove, handleCellClick, nextMove, winner } =
     useGameState(playersCount);
 
   return (
@@ -16,6 +16,7 @@ export default function HomePage() {
           className="mt-4"
           playersCount={playersCount}
           currentMove={currentMove}
+          winner={winner}
         />
         <GameField
           className="mt-6"
@@ -23,6 +24,7 @@ export default function HomePage() {
           currentMove={currentMove}
           handleCellClick={handleCellClick}
           nextMove={nextMove}
+          winner={winner}
         />
       </main>
     </div>

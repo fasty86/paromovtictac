@@ -6,3 +6,4 @@ export { CrossIcon } from "./cross";
 export { ZeroIcon } from "./zero";
 export { TriangleIcon } from "./triangle";
 export { SquareIcon } from "./square";
+export { Crown } from "./crown";

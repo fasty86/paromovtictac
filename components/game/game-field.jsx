@@ -13,6 +13,7 @@ export function GameField({
   nextMove,
   cells,
   handleCellClick,
+  winner,
 }) {
   return (
     <GameFieldLayout className={className}>
@@ -21,7 +22,7 @@ export function GameField({
         currentMove={currentMove}
         nextMove={nextMove}
       />
-      <GameGrid gameState={cells} onClick={handleCellClick} />
+      <GameGrid gameState={cells} onClick={handleCellClick} winner={winner} />
     </GameFieldLayout>
   );
 }
@@ -33,12 +34,24 @@ const actions = (
   </>
 );
 
-function GameGrid({ gameState, onClick }) {
+function GameGrid({ gameState, onClick, winner }) {
   return (
     <div className="grid grid-cols-[repeat(19,30px)] grid-rows-[repeat(19, 30px)]  mt-3">
-      {gameState.map((value, idx) => (
-        <GameCell key={idx} onClick={() => onClick(idx)} symbol={value} />
-      ))}
+      {gameState.map((value, idx) => {
+        const bgColor =
+          winner?.isWinner && winner?.winningSequenceCoordinates.includes(idx)
+            ? "bg-green-300"
+            : "";
+
+        return (
+          <GameCell
+            key={idx}
+            onClick={() => onClick(idx)}
+            symbol={value}
+            className={bgColor}
+          />
+        );
+      })}
     </div>
   );
 }

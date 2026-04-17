@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Profile } from "../profile";
 import { Divider } from "../divider";
 import { Timer } from "../timer";
-import { ZeroIcon, CrossIcon } from "./icons";
+import { ZeroIcon, CrossIcon, Crown } from "./icons";
 import { Badge } from "../badge";
 import { GameSymbol } from "./game-symbol";
 import { GAME_SYMBOLS } from "./constants";
@@ -37,7 +37,7 @@ const testPlayerData = [
     symbol: GAME_SYMBOLS.TRIANGLE,
   },
 ];
-export function GameInfo({ className, playersCount, currentMove }) {
+export function GameInfo({ className, playersCount, currentMove, winner }) {
   return (
     <div
       className={clsx(
@@ -53,7 +53,8 @@ export function GameInfo({ className, playersCount, currentMove }) {
             data={player.infoData}
             timer={player.timerData}
             symbol={player.symbol}
-            isActivePlayer={player.symbol === currentMove}
+            isActivePlayer={player.symbol === currentMove && !winner?.isWinner}
+            winner={winner}
           />
         );
       })}
@@ -67,6 +68,7 @@ function PlayerInfo({
   className,
   timerInitialValue = 60,
   isActivePlayer,
+  winner,
 }) {
   const [timer, setTimer] = useState(timerInitialValue);
   useEffect(() => {
@@ -84,8 +86,17 @@ function PlayerInfo({
   }, [isActivePlayer]);
 
   return (
-    <div className={clsx("flex items-baseline  w-[264px]", className)}>
+    <div
+      className={clsx(
+        "flex items-baseline  w-[264px]",
+        className,
+        winner?.isWinner && winner?.symbol === symbol ? " animate-pulse " : "",
+      )}
+    >
       <div className="relative">
+        {winner?.symbol === symbol && (
+          <Crown className="w-4 h-4 absolute left-16 -top-2" />
+        )}
         <Badge className="text-red-600">
           <GameSymbol symbol={symbol} />
         </Badge>
