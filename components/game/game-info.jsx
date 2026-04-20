@@ -37,7 +37,13 @@ const testPlayerData = [
     symbol: GAME_SYMBOLS.TRIANGLE,
   },
 ];
-export function GameInfo({ className, playersCount, currentMove, winner }) {
+export function GameInfo({
+  className,
+  playersCount,
+  currentMove,
+  winner,
+  onTimeout,
+}) {
   return (
     <div
       className={clsx(
@@ -55,6 +61,7 @@ export function GameInfo({ className, playersCount, currentMove, winner }) {
             symbol={player.symbol}
             isActivePlayer={player.symbol === currentMove && !winner?.isWinner}
             winner={winner}
+            onTimeout={onTimeout}
           />
         );
       })}
@@ -66,9 +73,10 @@ function PlayerInfo({
   data: { rating = 150, name = "Толмачев", avatarSrc },
   symbol = GAME_SYMBOLS.CROSS,
   className,
-  timerInitialValue = 60,
+  timerInitialValue = 10,
   isActivePlayer,
   winner,
+  onTimeout,
 }) {
   const [timer, setTimer] = useState(timerInitialValue);
   useEffect(() => {
@@ -77,13 +85,20 @@ function PlayerInfo({
     if (isActivePlayer) {
       timerId = setInterval(() => {
         setTimer((currentTimer) => {
-          if (currentTimer === 0) clearInterval(timerId);
+          if (currentTimer === 0) {
+            clearInterval(timerId);
+          }
           return currentTimer > 0 ? currentTimer - 1 : currentTimer;
         });
       }, 1000);
     }
     return () => clearInterval(timerId);
   }, [isActivePlayer]);
+  useEffect(() => {
+    if (timer === 0 && isActivePlayer) {
+      onTimeout(symbol);
+    }
+  }, [timer, isActivePlayer, symbol]);
 
   return (
     <div

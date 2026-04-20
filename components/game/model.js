@@ -1,7 +1,23 @@
 import { GAME_SYMBOLS } from "./constants";
 
-export function computeWinner(state, seqLength, fieldSize) {
+export function computeWinner(
+  state,
+  seqLength,
+  fieldSize,
+  playersTimeout,
+  playersCount,
+) {
   let winner = null;
+  if (playersTimeout.length === playersCount) {
+    return {
+      isWinner: true,
+      winningSequenceCoordinates: [],
+      symbol: playersTimeout[playersTimeout.length - 1],
+      // symbol: playersTimeout.filter(
+      //   (symbol) => !Object.keys(GAME_SYMBOLS).includes(symbol),
+      // )[0],
+    };
+  }
   function checkWinningCombination(checkResult, i) {
     let result;
     let response = null;
@@ -14,14 +30,6 @@ export function computeWinner(state, seqLength, fieldSize) {
         new Set(symbolValues).size === 1 &&
         Object.keys(GAME_SYMBOLS).includes(symbolValues[0]);
       if (result) {
-        console.log(
-          "Win condition met:",
-          symbolValues,
-          " index:",
-          i,
-          " condition rule: ",
-          condition,
-        );
         response = {
           isWinner: result,
           winningSequenceCoordinates: checkResult[condition],
@@ -59,9 +67,11 @@ export function computeWinner(state, seqLength, fieldSize) {
   }
   return winner;
 }
-export const calcNextMove = (currentMove, playersCount) => {
-  const keys = Object.keys(GAME_SYMBOLS).slice(0, playersCount);
+export const calcNextMove = (currentMove, playersCount, playersTimeout) => {
+  const keys = Object.keys(GAME_SYMBOLS)
+    .slice(0, playersCount)
+    .filter((player) => !playersTimeout.includes(player));
   const currentMoveIdx = keys.findIndex((key) => key === currentMove);
   const nextMove = keys[currentMoveIdx + 1] ?? keys[0];
-  return nextMove;
+  return nextMove || playersTimeout[playersTimeout.length - 1];
 };

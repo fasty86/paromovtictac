@@ -2,10 +2,19 @@ import { Header } from "../components/header";
 import { GameInfo, GameTitle, useGameState } from "../components/game";
 import { GameField } from "../components/game/game-field";
 import { useState } from "react";
+import { UiModal } from "../components/uikit/modal";
+
 export default function HomePage() {
   const [playersCount] = useState(2);
-  const { cells, currentMove, handleCellClick, nextMove, winner } =
-    useGameState(playersCount);
+  const {
+    cells,
+    currentMove,
+    handleCellClick,
+    nextMove,
+    winner,
+    playersTimeout,
+    handleTimeout,
+  } = useGameState(playersCount);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -17,6 +26,7 @@ export default function HomePage() {
           playersCount={playersCount}
           currentMove={currentMove}
           winner={winner}
+          onTimeout={handleTimeout}
         />
         <GameField
           className="mt-6"
@@ -27,6 +37,7 @@ export default function HomePage() {
           winner={winner}
         />
       </main>
+      <UiModal />
     </div>
   );
 }
