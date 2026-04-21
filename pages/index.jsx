@@ -3,6 +3,7 @@ import { GameInfo, GameTitle, useGameState } from "../components/game";
 import { GameField } from "../components/game/game-field";
 import { useState } from "react";
 import { UiModal } from "../components/uikit/modal";
+import { Button } from "../components/uikit/button";
 
 export default function HomePage() {
   const [playersCount] = useState(2);
@@ -37,7 +38,21 @@ export default function HomePage() {
           winner={winner}
         />
       </main>
-      <UiModal />
+      <UiModal>
+        <UiModal.Header className="text-2xl">Игра завершена</UiModal.Header>
+        <UiModal.Body>
+          <div>
+            <span className="text-sm">Победитель:</span>{" "}
+            <span className="text-teal-600">Sailenthobo</span>
+          </div>
+        </UiModal.Body>
+        <UiModal.Footer>
+          <Button size="md" type="outlined">
+            Вернуться
+          </Button>
+          <Button className="">Играть снова</Button>
+        </UiModal.Footer>
+      </UiModal>
     </div>
   );
 }
