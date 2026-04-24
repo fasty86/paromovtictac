@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Arrow, ClockIcon, Star, UserIcon } from "./icons";
+import { Arrow, ClockIcon, Star, UserIcon } from "../game-new/ui/icons";
 
 export function GameTitle({ playersCount }) {
   return (

@@ -27,7 +27,7 @@ export function UiModal({
           "min-h-[320px] mx-auto bg-white rounded-lg relative",
           "flex flex-col",
           {
-            md: "max-w-[720px] w-full",
+            md: "max-w-[640px] w-full",
             full: "w-full mx-5",
           }[width],
         )}

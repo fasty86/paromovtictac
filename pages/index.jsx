@@ -4,55 +4,51 @@ import { GameField } from "../components/game/game-field";
 import { useState } from "react";
 import { UiModal } from "../components/uikit/modal";
 import { Button } from "../components/uikit/button";
+import { Game } from "../components/game-new";
 
 export default function HomePage() {
-  const [playersCount] = useState(2);
-  const {
-    cells,
-    currentMove,
-    handleCellClick,
-    nextMove,
-    winner,
-    playersTimeout,
-    handleTimeout,
-  } = useGameState(playersCount);
+  // const [playersCount] = useState(4);
+  // const {
+  //   cells,
+  //   currentMove,
+  //   handleCellClick,
+  //   nextMove,
+  //   winner,
+  //   playersTimeout,
+  //   handleTimeout,
+  // } = useGameState(playersCount);
 
   return (
+    <HomePageLayout header={<Header />}>
+      <Game />
+    </HomePageLayout>
+  );
+}
+
+function HomePageLayout({ header, children }) {
+  return (
     <div className="bg-slate-50 min-h-screen">
-      <Header />
-      <main className="pt-6 mx-auto max-w-[632px] ">
-        <GameTitle playersCount={playersCount} />
-        <GameInfo
-          className="mt-4"
-          playersCount={playersCount}
-          currentMove={currentMove}
-          winner={winner}
-          onTimeout={handleTimeout}
-        />
-        <GameField
-          className="mt-6"
-          cells={cells}
-          currentMove={currentMove}
-          handleCellClick={handleCellClick}
-          nextMove={nextMove}
-          winner={winner}
-        />
-      </main>
-      <UiModal>
-        <UiModal.Header className="text-2xl">Игра завершена</UiModal.Header>
-        <UiModal.Body>
-          <div>
-            <span className="text-sm">Победитель:</span>{" "}
-            <span className="text-teal-600">Sailenthobo</span>
-          </div>
-        </UiModal.Body>
-        <UiModal.Footer>
-          <Button size="md" type="outlined">
-            Вернуться
-          </Button>
-          <Button className="">Играть снова</Button>
-        </UiModal.Footer>
-      </UiModal>
+      {header}
+      <main className="pt-6 mx-auto max-w-[632px] ">{children}</main>
     </div>
   );
+}
+
+{
+  /* <GameTitle playersCount={playersCount} />
+<GameInfo
+  className="mt-4"
+  playersCount={playersCount}
+  currentMove={currentMove}
+  winner={winner}
+  onTimeout={handleTimeout}
+/>
+<GameField
+  className="mt-6"
+  cells={cells}
+  currentMove={currentMove}
+  handleCellClick={handleCellClick}
+  nextMove={nextMove}
+  winner={winner}
+/> */
 }

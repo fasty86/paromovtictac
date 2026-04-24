@@ -1,8 +1,5 @@
-import { SquareIcon } from "../game-new/ui/icons";
-import { TriangleIcon } from "../game-new/ui/icons";
-import { CrossIcon } from "../game-new/ui/icons";
-import { ZeroIcon } from "../game-new/ui/icons";
-import { GAME_SYMBOLS } from "./constants";
+import { GAME_SYMBOLS } from "../../game-new/constants";
+import { CrossIcon, SquareIcon, ZeroIcon, TriangleIcon } from "./icons";
 
 export function GameSymbol({ symbol, className }) {
   const Icon = {

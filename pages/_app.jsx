@@ -8,6 +8,7 @@ export default function App({ Component, componentProps }) {
   return (
     <div className={inter.className}>
       <Component {...componentProps} />
+      <div id="modal"></div>
     </div>
   );
 }

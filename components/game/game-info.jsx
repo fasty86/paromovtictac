@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Profile } from "../profile";
 import { Divider } from "../divider";
 import { Timer } from "../timer";
-import { ZeroIcon, CrossIcon, Crown } from "./icons";
+import { ZeroIcon, CrossIcon, Crown } from "../game-new/ui/icons";
 import { Badge } from "../badge";
 import { GameSymbol } from "./game-symbol";
 import { GAME_SYMBOLS } from "./constants";
