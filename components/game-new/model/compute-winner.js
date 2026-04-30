@@ -6,13 +6,16 @@ export function computeWinner(
   fieldSize,
   playersTimeout,
   playersCount,
+  timers,
+  nextMove,
+  currentMove,
 ) {
   let winner = null;
-  if (playersTimeout.length === playersCount) {
+  if (currentMove === nextMove) {
     return {
       isWinner: true,
       winningSequenceCoordinates: [],
-      symbol: playersTimeout[playersTimeout.length - 1],
+      symbol: currentMove,
     };
   }
   function checkWinningCombination(checkResult, i) {

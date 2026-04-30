@@ -6,37 +6,25 @@ import { GameSymbol } from "./game-symbol";
 import { Crown } from "./icons";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useNow } from "../../lib/timers";
 
 export function PlayerInfo({
   data: { rating = 150, name = "Толмачев", avatarSrc },
   symbol = GAME_SYMBOLS.CROSS,
-  timer: seconds = 10,
+  timer,
   isActivePlayer,
   winner,
   onTimeout,
   className,
+  timerStartAt,
 }) {
-  const [timer, setTimer] = useState(seconds);
-  useEffect(() => {
-    let timerId = null;
+  const now = useNow(timerStartAt, 1000);
 
-    if (isActivePlayer) {
-      timerId = setInterval(() => {
-        setTimer((currentTimer) => {
-          if (currentTimer === 0) {
-            clearInterval(timerId);
-          }
-          return currentTimer > 0 ? currentTimer - 1 : currentTimer;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timerId);
-  }, [isActivePlayer]);
-  useEffect(() => {
-    if (timer === 0 && isActivePlayer) {
-      onTimeout(symbol);
-    }
-  }, [timer, isActivePlayer, symbol]);
+  const mills = Math.max(
+    now && timerStartAt ? timer - (now - timerStartAt) : timer,
+    0,
+  );
+  const seconds = Math.ceil(mills / 1000);
 
   return (
     <div
@@ -66,7 +54,7 @@ export function PlayerInfo({
         </div>
       </div>
       <Divider />
-      <Timer data={timer} isActive={isActivePlayer} />
+      <Timer data={seconds} isActive={timerStartAt} />
     </div>
   );
 }
